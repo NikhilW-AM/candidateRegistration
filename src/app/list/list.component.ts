@@ -21,8 +21,10 @@ export class ListComponent implements OnInit {
     })
   }
 
-  totalExperience(exp:any) {
-    return exp.map((item:any)=> parseInt(item.Duration)).reduce((prev:number,next:number)=>prev+next)
+  totalExperience(exprience: any): number {
+    console.log(exprience);
+
+    return exprience.map((item:any)=> parseInt(item.Duration)).reduce((prev:number,next:number)=>prev+next)
   }
 
   editDetails(user:Candidate) {
@@ -31,7 +33,6 @@ export class ListComponent implements OnInit {
   deleteDetails(user: Candidate) {
      if(user._id)
        this._httpService.deleteSpecificPost(user._id).subscribe(res => {
-         //console.log(res.data);
          if (res.data) {
            this._toastrService.success('User deleted successfully!');
            this.detailsArray = res.data

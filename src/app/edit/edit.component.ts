@@ -43,7 +43,6 @@ export class EditComponent implements OnInit {
         this.optionArray.map((contact: any) => this.createContact(contact))
       ),
     });
-    //this.setValue();
   }
 
   createContact(contact: exprience): FormGroup {
@@ -81,7 +80,7 @@ export class EditComponent implements OnInit {
     if (this.id) {
       this._httpService.getSpecificPost(this.id).subscribe((user: Candidate) => {
         this.editUser = user;
-        console.log(this.editUser)
+        //console.log(this.editUser)
         this.setValue()
       })
     }
@@ -117,8 +116,6 @@ export class EditComponent implements OnInit {
   }
 
   selectSkill(e: any) {
-    console.log(e.target.value);
-
     const formArray = this.editForm.get('skills') as FormArray;
     if (!e.target.checked) {
       var i = formArray.controls.findIndex((x) => x === e.target.value);
@@ -130,7 +127,6 @@ export class EditComponent implements OnInit {
 
   submit()
   {
-    //console.log(this.editForm.value);
     if (this.id)
     {
       this._httpService.updateSpecificPost(this.id, this.editForm.value).subscribe(res => {

@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { exprience } from '../Interfaces/exprience';
-import { Candidate } from '../Interfaces/candidate'
 import { HttpService } from '../http.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,8 +19,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddCandidateComponent implements OnInit {
   constructor(private _fb: FormBuilder, private _router: Router,private _httpService: HttpService,private _toastrService: ToastrService) {}
-
-  candidateArray: Candidate[] = [];
   addCandidateForm!: FormGroup;
   skillsArray: string[] = [
     'Angular',
@@ -37,9 +34,6 @@ export class AddCandidateComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    //getting localStorage data
-    this.candidateArray = JSON.parse(localStorage.getItem('details') || '[]');
-
     //Creating form
     this.addCandidateForm = this._fb.group({
       firstname: ['', Validators.required],
@@ -92,7 +86,6 @@ export class AddCandidateComponent implements OnInit {
 
   selectSkill(e: any) {
     const formArray = this.addCandidateForm.get('skills') as FormArray;
-    // console.log(e.target.checked);
     if (!e.target.checked) {
       var i = formArray.controls.findIndex((x) => x === e.target.value);
       formArray.removeAt(i);
@@ -102,11 +95,6 @@ export class AddCandidateComponent implements OnInit {
   }
 
   submit() {
-    this.candidateArray.push(this.addCandidateForm.value)
-    //localStorage.setItem('details', JSON.stringify(this.candidateArray));
-    //this._router.navigate(['/list']);
-    // console.log(this.addCandidateForm.value);
-
     this._httpService.postData(this.addCandidateForm.value).subscribe(res => {
       console.log(res)
       if (res)
