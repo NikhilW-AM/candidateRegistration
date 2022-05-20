@@ -1,0 +1,48 @@
+<body class="bg-light">
+  <div class="container my-4">
+    <main>
+      <div class="py-5">
+        <h2>
+          Candidates List
+          <button class="btn btn-primary float-end" routerLink="/add">
+            Add Candidate
+          </button>
+        </h2>
+      </div>
+
+      <div class="row">
+        <div class="col-12 ms-auto me-auto">
+          <div class="card">
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Number of Skills</th>
+                    <th>Total Work Experience (in months)</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let can of detailsArray; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ can.firstname +" "+ can.lastname }}</td>
+                    <td>{{ can.email }}</td>
+                    <td>{{ can.skills.length }}</td>
+                    <td>{{ totalExperience(can.exprience) }}</td>
+                    <td>
+                      <a class="text-primary" id="point" (click)="editDetails(can)">Edit</a>
+                      <a class="text-danger ms-2" id="point" (click)="deleteDetails(can)">Delete</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>

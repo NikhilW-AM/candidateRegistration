@@ -1,0 +1,6 @@
+@import '~ngx-toastr/toastr';
+
+#point
+{
+  cursor: pointer;
+}
